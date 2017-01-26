@@ -18,13 +18,16 @@ $product->id = $data->id;
 
 // read the details of product to be edited
 $product->readOne();
-
+//descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida
 // create array
 $product_arr[] = array(
     "id" =>  $product->id,
-    "name" => $product->name,
-    "description" => $product->description,
-    "price" => $product->price
+    "descripcion" => $product->descripcion,
+    "precioCompra" => $product->precioCompra,
+    "precioVenta" => $product->precioVenta,
+    "departamento_id" => $product->departamento_id,
+    "cantidad" => $product->cantidad,
+    "unidadDeMedida" => $product->unidadDeMedida
 );
 
 // make it json format

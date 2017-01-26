@@ -12,18 +12,21 @@ $product = new Product($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // set product property values
-$product->name = $data->name;
-$product->price = $data->price;
-$product->description = $data->description;
-$product->created = date('Y-m-d H:i:s');
+$product->descripcion = $data->descripcion;
+$product->precioCompra = $data->precioCompra;
+$product->precioVenta = $data->precioVenta;
+$product->departamento_id = $data->departamento_id;
+$product->cantidad = $data->cantidad;
+$product->unidadDeMedida = $data->unidadDeMedida;
+//$product->created = date('Y-m-d H:i:s');
 
 // create the product
 if($product->create()){
-    echo "Product was created.";
+    echo "Producto fue creado.";
 }
 
 // if unable to create the product, tell the user
 else{
-    echo "Unable to create product.";
+    echo "No se ha podido crear un producto.";
 }
 ?>

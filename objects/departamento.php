@@ -1,15 +1,13 @@
 <?php
-class Product{
+class Departamento{
     private $conn;
-    private $table_name="productos";
+    private $table_name="departamento";
 
     public $id;
-    public $descripcion;
-    public $precioCompra;
-    public $precioVenta;
-    public $departamento_id;
-    public $cantidad;
-    public $unidadDeMedida;
+    public $nombre;
+    public $estado;
+    public $tienda_id;
+
     public $created;
 
 
@@ -24,7 +22,7 @@ class Product{
         $query = "INSERT INTO
                     " . $this->table_name . "
                 SET
-                    descripcion=:descripcion, precioCompra=:precioCompra, precioVenta=:precioVenta, departamento_id=:departamento_id,cantidad=:cantidad,unidadDeMedida=:unidadDeMedida";
+                    nombre=:nombre, estado=:estado, tienda_id=:tienda_id";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
@@ -35,12 +33,9 @@ class Product{
         //$this->description=htmlspecialchars(strip_tags($this->description));
 
         // bind values
-        $stmt->bindParam(":descripcion", $this->descripcion);
-        $stmt->bindParam(":precioCompra", $this->precioCompra);
-        $stmt->bindParam(":precioVenta", $this->precioVenta);
-        $stmt->bindParam(":departamento_id", $this->departamento_id);
-        $stmt->bindParam(":cantidad", $this->cantidad);
-        $stmt->bindParam(":unidadDeMedida", $this->unidadDeMedida);
+        $stmt->bindParam(":nombre", $this->nombre);
+        $stmt->bindParam(":estado", $this->estado);
+        $stmt->bindParam(":tienda_id", $this->tienda_id);
 
         // execute query
         if($stmt->execute()){
@@ -58,7 +53,7 @@ class Product{
     function readAll(){
         // select all query
         $query = "SELECT
-                   id, descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida
+                   id, nombre, estado,tienda_id
                 FROM
                     " . $this->table_name . "
                 ORDER BY
@@ -76,7 +71,7 @@ function readOne(){
 
     // query to read single record
     $query = "SELECT
-                descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida
+                nombre, estado,tienda_id
             FROM
                 " . $this->table_name . "
             WHERE
@@ -97,14 +92,10 @@ function readOne(){
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // set values to object properties
-    //descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida
 
-    $this->descripcion = $row['descripcion'];
-    $this->precioCompra = $row['precioCompra'];
-    $this->precioVenta= $row['precioVenta'];
-    $this->departamento_id= $row['departamento_id'];
-    $this->cantidad= $row['cantidad'];
-    $this->unidadDeMedida= $row['unidadDeMedida'];
+    $this->nombre = $row['nombre'];
+    $this->estado = $row['estado'];
+    $this->tienda_id= $row['tienda_id'];
 
 }
 
@@ -116,12 +107,9 @@ function update(){
     $query = "UPDATE
                 " . $this->table_name . "
             SET
-                descripcion = :descripcion,
-                precioCompra = :precioCompra,
-                precioVenta = :precioVenta,
-                departamento_id = :departamento_id,
-                cantidad = :cantidad,
-                unidadDeMedida = :unidadDeMedida
+                nombre = :nombre,
+                estado = :estado,
+                tienda_id = : tienda_id
             WHERE
                 id = :id";
 
@@ -134,12 +122,9 @@ function update(){
     //$this->description=htmlspecialchars(strip_tags($this->description));
 
     // bind new values
-    $stmt->bindParam(':descripcion', $this->decripcion);
-    $stmt->bindParam(':precioCompra', $this->precioCompra);
-    $stmt->bindParam(':precioVenta', $this->precioVenta);
-    $stmt->bindParam(':departamento_id', $this->departamento_id);
-    $stmt->bindParam(':cantidad', $this->cantidad);
-    $stmt->bindParam(':unidadDeMedida', $this->unidadDeMedida);
+    $stmt->bindParam(':nombre', $this->nombre);
+    $stmt->bindParam(':estado', $this->estado);
+    $stmt->bindParam(':tienda_id', $this->tienda_id);
     $stmt->bindParam(':id', $this->id);
 
     // execute the query

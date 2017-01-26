@@ -3,7 +3,7 @@ class Database{
 
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "ventasmati";
+    private $db_name = "walmart";
     private $username = "root";
     private $password = "mysql";
     public $conn;

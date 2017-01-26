@@ -3,18 +3,18 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 // include database and object files
-include_once 'config/database.php';
-include_once 'objects/product.php';
+include_once '../config/database.php';
+include_once '../objects/departamento.php';
 
 // instantiate database and product object
 $database = new Database();
 $db = $database->getConnection();
 
 // initialize object
-$product = new Product($db);
+$dpto = new Departamento($db);
 
 // query products
-$stmt = $product->readAll();
+$stmt = $dpto->readAll();
 $num = $stmt->rowCount();
 
 $data="";
@@ -36,17 +36,12 @@ if($num>0){
 
         $data .= '{';
             $data .= '"id":"'  . $id . '",';
-            $data .= '"descripcion":"' . $descripcion . '",';
-            $data .= '"precioCompra":"' . $precioCompra . '",';
-            $data .= '"precioVenta":"' . $precioVenta . '",';
-            $data .= '"departamento_id":"' . $departamento_id . '",';
-            $data .= '"cantidad":"' . $cantidad . '",';
-            $data .= '"unidadDeMedida":"' . $unidadDeMedida . '"';
+            $data .= '"nombre":"' . $nombre . '",';
+            $data .= '"estado":"' . $estado . '",';
+            $data .= '"tienda_id":"' . $tienda_id . '"';
         $data .= '}';
-
         $data .= $x<$num ? ',' : ''; $x++; }
 }
-
 // json format output
 echo '{"records":[' . $data . ']}';
 ?>
