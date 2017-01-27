@@ -38,7 +38,7 @@ if($num>0){
             $data .= '"id":"'  . $id . '",';
             $data .= '"nombre":"' . $nombre . '",';
             $data .= '"estado":"' . $estado . '",';
-            $data .= '"tienda_id":"' . $tienda_id . '"';
+            $data .= '"tiendanombre":"' . $tiendanombre . '"';
         $data .= '}';
         $data .= $x<$num ? ',' : ''; $x++; }
 }

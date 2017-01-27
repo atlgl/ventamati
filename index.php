@@ -72,11 +72,11 @@
 
 
                     <div class="input-field col s12">
-                        <select ng-model="departamento_id" multiple ng-init="getDeptoAll()">
-                          <option value="" disabled selected>Seleccionar un departamento</option>
-                          <option ng-repeat="d in deptos" value="{{ d.id} }">{{ d.nombre }}</option>
+                        <select class="browser-default" ng-model="select.value2" ng-init="getDeptoAll()" >
+                            <option value="" disabled selected>Seleccionar un departamento</option>
+                          <option ng-repeat="d in deptos" value="{{ d.id } }">{{ d.nombre +'--'+d.tiendanombre}}</option>
                         </select>
-                        <label>Departamento</label>
+
                       </div>
 
 
@@ -227,9 +227,9 @@ app.controller('productsCtrl', function($scope, $http) {
             function (response){
 
                 $scope.deptos=response.data.records;
+                //$('select').material_select();
 
 
-                $('select').material_select();
             }
         );
     }
@@ -325,7 +325,7 @@ $scope.deleteProduct = function(id){
     $(document).ready(function(){
     // initialize modal
         $('.modal').modal();
-
+        //$('select').material_select();
     });
 </script>
 

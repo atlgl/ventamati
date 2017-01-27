@@ -7,6 +7,7 @@ class Departamento{
     public $nombre;
     public $estado;
     public $tienda_id;
+    public $tiendanombre;
 
     public $created;
 
@@ -53,11 +54,16 @@ class Departamento{
     function readAll(){
         // select all query
         $query = "SELECT
-                   id, nombre, estado,tienda_id
+                   departamento.id,
+                   departamento.nombre,
+                   departamento.estado,
+                   departamento.tienda_id,
+                   tienda.nombre as tiendanombre
                 FROM
                     " . $this->table_name . "
+                INNER JOIN tienda ON departamento.tienda_id = tienda.id
                 ORDER BY
-                    id DESC";
+                    id ASC";
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
         // execute query
