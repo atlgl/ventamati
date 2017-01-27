@@ -36,9 +36,15 @@ if($num>0){
 
         $data .= '{';
             $data .= '"id":"'  . $id . '",';
-            $data .= '"nombre":"' . $nombre . '",';
-            $data .= '"domicilio":"' . $domicilio . '",';
-            $data .= '"estado":"' . $estado . '"';
+            $data .= '"puesto":"' . $puesto . '",';
+            $data .= '"persona_id":"' . $persona_id . '",';
+            $data .= '"tienda_id":"' . $tienda_id . '",';
+            $data .= '"tiendanombre":"' . $tiendanombre . '",';
+            $data .= '"personanombre":"' . $personanombre . '",';
+            $data .= '"apat":"' . $apat . '",';
+            $data .= '"amat":"' . $amat . '",';
+            $data .= '"email":"' . $email . '",';
+            $data .= '"domicilio":"' . $domicilio . '"';
         $data .= '}';
 
         $data .= $x<$num ? ',' : ''; $x++; }
