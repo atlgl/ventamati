@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Productos</title>
+    <title>Tienda</title>
 
     <!-- include material design CSS -->
-    <link rel="stylesheet" href="libs/css/materialize/css/materialize.min.css" />
+    <link rel="stylesheet" href="../libs/css/materialize/css/materialize.min.css" />
 
     <!-- include material design icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -36,45 +36,30 @@
 <div class="container" ng-app="myApp" ng-controller="productsCtrl">
     <div class="row">
         <div class="col s12">
-            <h4>Productos</h4>
+            <h4>Tienda</h4>
             <!-- modal for for creating new product -->
             <div id="modal-product-form" class="modal">
                 <div class="modal-content">
-                    <h4 id="modal-product-title">Nuevo Producto</h4>
+                    <h4 id="modal-product-title">Nueva Tienda</h4>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input ng-model="descripcion" type="text" class="validate" id="form-name" placeholder="Nombre del producto..." />
-                            <label for="descripcion">Nombre</label>
+                            <input ng-model="nombre" type="text" class="validate" id="form-nombre" placeholder="Nombre de la tienda" required title="Escriba un nombre de tienda" />
+                            <label for="nombre">Nombre</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <textarea ng-model="precioCompra" type="text" class="validate materialize-textarea" placeholder="precio Compra..."></textarea>
-                            <label for="precioCompra">Precio de Compra</label>
+                            <input ng-model="domicilio" type="text" class="validate" placeholder="Domicilio..." id="form-domicilio"/>
+                            <label for="domicilio">Domicilio</label>
                         </div>
 
 
-                        <div class="input-field col s12">
-                            <input ng-model="precioVenta" type="text" class="validate" id="form-price" placeholder="Precio de Venta..." />
-                            <label for="precioVenta">Precio de Venta</label>
-                        </div>
-
-
-
-                        <div class="input-field col s12">
-                            <input ng-model="cantidad" type="text" class="validate" id="form-price" placeholder="Cantidad..." />
-                            <label for="cantidad">Cantidad</label>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input ng-model="unidadDeMedida" type="text" class="validate" id="form-price" placeholder="Unidad de Medida..." />
-                            <label for="unidadDeMedida">Unidad de Medida</label>
-                        </div>
 
 
                     <div class="input-field col s12">
-                        <select class="browser-default" ng-model="departamento_id" ng-init="getDeptoAll()" >
-                            <option value="" disabled selected>Seleccionar un departamento</option>
-                          <option ng-repeat="d in deptos" ng-value="d.id">{{ d.nombre +'--'+d.tiendanombre}}</option>
+                        <select class="browser-default" ng-model="estado">
+                            <option value="" disabled selected>Seleccionar</option>
+                          <option  ng-value="1">Activo</option>
+                          <option  ng-value="2">Desactivado</option>
                         </select>
 
                       </div>
@@ -96,7 +81,7 @@
 
 
              <!-- used for searching the current list -->
-<input type="text" ng-model="search" class="form-control" placeholder="Search product..." />
+<input type="text" ng-model="search" class="form-control" placeholder="Buscar Tienda..." />
 
 <!-- table that shows product record list -->
 <table class="hoverable bordered">
@@ -104,28 +89,23 @@
     <thead>
         <tr>
             <th class="text-align-center">ID</th>
-            <th class="width-30-pct">Descripcion</th>
-            <th class="text-align-center">Precio Venta</th>
-            <th class="text-align-center">Precio Venta</th>
-            <th class="text-align-center">Departamento</th>
-            <th class="text-align-center">Cantidad</th>
-            <th class="text-align-center">Unidad de Medida</th>
-            <th class="text-align-center">Acciones</th>
+            <th class="width-30-pct">Nombre</th>
+            <th class="text-align-center">Domicilio</th>
+            <th class="text-align-center">Estado</th>
+
         </tr>
     </thead>
 
     <tbody ng-init="getAll()">
         <tr ng-repeat="x in names | filter:search">
             <td class="text-align-center">{{ x.id }}</td>
-            <td>{{ x.descripcion }}</td>
-            <td>{{ x.precioVenta }}</td>
-            <td>{{ x.precioCompra }}</td>
-            <td>{{ x.departamento_id }}</td>
-            <td>{{ x.cantidad }}</td>
-            <td>{{ x.unidadDeMedida }}</td>
+            <td>{{ x.nombre }}</td>
+            <td>{{ x.domicilio }}</td>
+            <td>{{ x.estado }}</td>
+
             <td>
-                <a ng-click="readOne(x.id)" class="waves-effect waves-light btn margin-bottom-1em"><i class="material-icons left">edit</i>Edit</a>
-                <a ng-click="deleteProduct(x.id)" class="waves-effect waves-light btn margin-bottom-1em"><i class="material-icons left">delete</i>Delete</a>
+                <a ng-click="readOne(x.id)" class="waves-effect waves-light btn margin-bottom-1em"><i class="material-icons left">edit</i>Editar</a>
+                <a ng-click="deleteProduct(x.id)" class="waves-effect waves-light btn margin-bottom-1em"><i class="material-icons left">delete</i>Eliminar</a>
             </td>
         </tr>
     </tbody>
@@ -143,13 +123,13 @@
     </div> <!-- end row -->
 </div> <!-- end container -->
 <!-- include jquery -->
-<script type="text/javascript" src="libs/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../libs/js/jquery-3.1.1.min.js"></script>
 
 <!-- material design js -->
-<script type="text/javascript"  src="libs/css/materialize/js/materialize.min.js"></script>
+<script type="text/javascript"  src="../libs/css/materialize/js/materialize.min.js"></script>
 
 <!-- include angular js -->
-<script type="text/javascript"  src="libs/js/angular.min.js"></script>
+<script type="text/javascript"  src="../libs/js/angular.min.js"></script>
 
 <script type="text/javascript">
 // angular js codes will be here
@@ -174,12 +154,10 @@ app.controller('productsCtrl', function($scope, $http) {
     // clear variable / form values
     $scope.clearForm = function(){
         $scope.id = "";
-        $scope.descripcion = "";
-        $scope.precioCompra = "";
-        $scope.precioVenta = "";
-        $scope.departamento_id = "";
-        $scope.cantidad = "";
-        $scope.unidadDeMedida = "";
+        $scope.nombre = "";
+        $scope.domicilio = "";
+        $scope.estado = "";
+
     }
 
 
@@ -187,19 +165,16 @@ app.controller('productsCtrl', function($scope, $http) {
     $scope.createProduct = function(){
 //descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida
         // fields in key-value pairs
-        $http.post('create_product.php', {
-                'descripcion' : $scope.descripcion,
-                'precioCompra' : $scope.precioCompra,
-                'precioVenta' : $scope.precioVenta,
-                'departamento_id' : $scope.departamento_id,
-                'cantidad' : $scope.cantidad,
-                'unidadDeMedida' : $scope.unidadDeMedida
+        $http.post('create_tienda.php', {
+                'nombre' : $scope.nombre,
+                'domicilio' : $scope.domicilio,
+                'estado' : $scope.estado
             }).then(
             function (data, status, headers, config) {
 
                 console.log(data);
             // tell the user new product was created
-            Materialize.toast("Producto fue creado", 4000);
+            Materialize.toast("Tienda fue creada", 4000);
 
             // close modal
             $('#modal-product-form').modal('close');
@@ -215,31 +190,21 @@ app.controller('productsCtrl', function($scope, $http) {
 
     // read products
     $scope.getAll = function(){
-        $http.get("read_products.php").then(
+        $http.get("read_tienda.php").then(
             function (response){
                 $scope.names=response.data.records;
             }
         );
     }
 
-    $scope.getDeptoAll = function(){
-        $http.get("controllerdepto/read_depto.php").then(
-            function (response){
 
-                $scope.deptos=response.data.records;
-                //$('select').material_select();
-
-
-            }
-        );
-    }
 
 
         // retrieve record to fill out the form
     $scope.readOne = function(id){
 
         // change modal title
-        $('#modal-product-title').text("Edit Product");
+        $('#modal-product-title').text("Editar tienda");
 
         // show udpate product button
         $('#btn-update-product').show();
@@ -255,12 +220,10 @@ app.controller('productsCtrl', function($scope, $http) {
 
             // put the values in form
             $scope.id = data.data[0]["id"];
-            $scope.descripcion = data.data[0]["descripcion"];
-            $scope.precioCompra = data.data[0]["precioCompra"];
-            $scope.precioVenta = data.data[0]["precioVenta"];
-            $scope.cantidad = data.data[0]["cantidad"];
-            $scope.unidadDeMedida = data.data[0]["unidadDeMedida"];
-            $scope.departamento_id = data.data[0]["departamento_id"];
+            $scope.nombre = data.data[0]["nombre"];
+            $scope.domicilio = data.data[0]["domicilio"];
+            $scope.estado = data.data[0]["estado"];
+
 
             // show modal
             $('#modal-product-form').modal('open');
@@ -272,13 +235,10 @@ app.controller('productsCtrl', function($scope, $http) {
 
     // update product record / save changes
     $scope.updateProduct = function(){
-        $http.post('update_product.php', {
-                'descripcion' : $scope.descripcion,
-                'precioCompra' : $scope.precioCompra,
-                'precioVenta' : $scope.precioVenta,
-                'departamento_id' : $scope.departamento_id,
-                'cantidad' : $scope.cantidad,
-                'unidadDeMedida' : $scope.unidadDeMedida
+        $http.post('update_tienda.php', {
+                'nombre' : $scope.nombre,
+                'domicilio' : $scope.domicilio,
+                'estado' : $scope.estado
         })
         .then(function (data, status, headers, config){
             // tell the user product record was updated
@@ -302,7 +262,7 @@ $scope.deleteProduct = function(id){
     // ask the user if he is sure to delete the record
     if(confirm("Esta seguro de eliminar el producto?")){
         // post the id of product to be deleted
-        $http.post('delete_product.php', {
+        $http.post('delete_tienda.php', {
             'id' : id
         }).then(function (data, status, headers, config){
 

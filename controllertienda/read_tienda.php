@@ -3,18 +3,18 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 // include database and object files
-include_once 'config/database.php';
-include_once 'objects/product.php';
+include_once '../config/database.php';
+include_once '../objects/Tienda.php';
 
-// instantiate database and product object
+// instantiate database and Tienda object
 $database = new Database();
 $db = $database->getConnection();
 
 // initialize object
-$product = new Product($db);
+$tienda = new Tienda($db);
 
-// query products
-$stmt = $product->readAll();
+// query Tiendas
+$stmt = $tienda->readAll();
 $num = $stmt->rowCount();
 
 $data="";
@@ -36,12 +36,9 @@ if($num>0){
 
         $data .= '{';
             $data .= '"id":"'  . $id . '",';
-            $data .= '"descripcion":"' . $descripcion . '",';
-            $data .= '"precioCompra":"' . $precioCompra . '",';
-            $data .= '"precioVenta":"' . $precioVenta . '",';
-            $data .= '"departamento_id":"' . $departamento_id . '",';
-            $data .= '"cantidad":"' . $cantidad . '",';
-            $data .= '"unidadDeMedida":"' . $unidadDeMedida . '"';
+            $data .= '"nombre":"' . $nombre . '",';
+            $data .= '"domicilio":"' . $domicilio . '",';
+            $data .= '"estado":"' . $estado . '"';
         $data .= '}';
 
         $data .= $x<$num ? ',' : ''; $x++; }
