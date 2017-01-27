@@ -10,10 +10,13 @@ class Empleado{
     public $tienda_id;
 
 
-    public $nombre;
+    public $personanombre;
     public $apat;
     public $amat;
     public $domicilio;
+    public $email;
+
+    public $tiendanombre
 
 
     public function __construct($db){
@@ -59,11 +62,23 @@ class Empleado{
     function readAll(){
         // select all query
         $query = "SELECT
-                   id, puesto, id_jefe, persona_id, tienda_id
+                    empleado.id,
+                    empleado.puesto,
+                    empleado.id_jefe,
+                    empleado.persona_id,
+                    empleado.tienda_id,
+                    tienda.nombre as tiendanombre,
+                    persona.nombre as personanombe,
+                    persona.apat,
+                    persona.amat,
+                    persona.email,
+                    persona.domicilio
                 FROM
                     " . $this->table_name . "
+                INNER JOIN tienda ON empleado.tienda_id = tienda.id
+                INNER JOIN persona ON empleado.persona_id = persona.id
                 ORDER BY
-                    id DESC";
+                    empleado.id ASC";
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
         // execute query
