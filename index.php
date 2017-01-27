@@ -58,12 +58,6 @@
                             <label for="precioVenta">Precio de Venta</label>
                         </div>
 
-                        <div class="input-field col s12">
-                            <select ng-init="getDeptoAll()"  ng-model="departamento_id" type="text" class="validate" id="departamento_id" placeholder="Departamento..." >
-                                <option ng-repeat="d in deptos" value="{{d.id}}">{{d.nombre}}</option>
-                            </select>
-                            <label for="departamento_id">Departamento</label>
-                        </div>
 
 
                         <div class="input-field col s12">
@@ -75,6 +69,17 @@
                             <input ng-model="unidadDeMedida" type="text" class="validate" id="form-price" placeholder="Unidad de Medida..." />
                             <label for="unidadDeMedida">Unidad de Medida</label>
                         </div>
+
+
+                    <div class="input-field col s12">
+                        <select ng-model="departamento_id" multiple ng-init="getDeptoAll()">
+                          <option value="" disabled selected>Seleccionar un departamento</option>
+                          <option ng-repeat="d in deptos" value="{{ d.id} }">{{ d.nombre }}</option>
+                        </select>
+                        <label>Departamento</label>
+                      </div>
+
+
 
 
 
@@ -220,7 +225,11 @@ app.controller('productsCtrl', function($scope, $http) {
     $scope.getDeptoAll = function(){
         $http.get("controllerdepto/read_depto.php").then(
             function (response){
+                $('select').material_select('destroy');
                 $scope.deptos=response.data.records;
+
+
+                $('select').material_select();
             }
         );
     }
@@ -313,6 +322,7 @@ $scope.deleteProduct = function(id){
     $(document).ready(function(){
     // initialize modal
         $('.modal').modal();
+        $('select').material_select();
     });
 </script>
 
