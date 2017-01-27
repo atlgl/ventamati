@@ -225,7 +225,7 @@ app.controller('productsCtrl', function($scope, $http) {
     $scope.getDeptoAll = function(){
         $http.get("controllerdepto/read_depto.php").then(
             function (response){
-                $('select').material_select('destroy');
+
                 $scope.deptos=response.data.records;
 
 
@@ -255,9 +255,12 @@ app.controller('productsCtrl', function($scope, $http) {
 
             // put the values in form
             $scope.id = data.data[0]["id"];
-            $scope.name = data.data[0]["name"];
-            $scope.description = data.data[0]["description"];
-            $scope.price = data.data[0]["price"];
+            $scope.descripcion = data.data[0]["descripcion"];
+            $scope.precioCompra = data.data[0]["precioCompra"];
+            $scope.precioVenta = data.data[0]["precioVenta"];
+            $scope.cantidad = data.data[0]["cantidad"];
+            $scope.unidadDeMedida = data.data[0]["unidadDeMedida"];
+            $scope.departamento_id = data.data[0]["departamento_id"];
 
             // show modal
             $('#modal-product-form').modal('open');
@@ -322,7 +325,7 @@ $scope.deleteProduct = function(id){
     $(document).ready(function(){
     // initialize modal
         $('.modal').modal();
-        $('select').material_select();
+
     });
 </script>
 
