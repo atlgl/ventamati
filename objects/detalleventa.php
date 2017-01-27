@@ -1,12 +1,13 @@
-<?php
-class Tienda{
+  <?php
+class DetalleVenta{
     private $conn;
-    private $table_name="tienda";
+    private $table_name="detalleventa";
 
     public $id;
-    public $nombre;
-    public $domicilio;
-    public $estado;
+    public $id_producto;
+    public $venta_id;
+    public $productos_id;
+    public $cantidad;
 
     public $created;
 
@@ -22,7 +23,7 @@ class Tienda{
         $query = "INSERT INTO
                     " . $this->table_name . "
                 SET
-                    nombre=:nombre, domicilio=:domicilio, estado=:estado";
+                    id_producto=:id_producto, venta_id=:venta_id, productos_id=:productos_id, cantidad=:cantidad";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
@@ -33,9 +34,10 @@ class Tienda{
         //$this->description=htmlspecialchars(strip_tags($this->description));
 
         // bind values
-        $stmt->bindParam(":nombre", $this->nombre);
-        $stmt->bindParam(":domicilio", $this->domicilio);
-        $stmt->bindParam(":estado", $this->estado);
+        $stmt->bindParam(":id_producto", $this->id_producto);
+        $stmt->bindParam(":venta_id", $this->venta_id);
+        $stmt->bindParam(":productos_id", $this->productos_id);
+        $stmt->bindParam(":cantidad", $this->cantidad);
 
         // execute query
         if($stmt->execute()){
@@ -53,7 +55,7 @@ class Tienda{
     function readAll(){
         // select all query
         $query = "SELECT
-                   id, nombre, domicilio, estado
+                   id,id_producto, venta_id, productos_id, cantidad
                 FROM
                     " . $this->table_name . "
                 ORDER BY
@@ -71,7 +73,7 @@ function readOne(){
 
     // query to read single record
     $query = "SELECT
-                nombre, domicilio, estado
+                id_producto, venta_id, productos_id, cantidad
             FROM
                 " . $this->table_name . "
             WHERE
@@ -92,10 +94,12 @@ function readOne(){
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // set values to object properties
-//nombre=:nombre, domicilio=:domicilio, estado=:estado
-    $this->nombre = $row['nombre'];
-    $this->domicilio = $row['domicilio'];
-    $this->estado= $row['estado'];
+    //id_producto, venta_id, productos_id, cantidad
+
+    $this->id_producto = $row['id_producto'];
+    $this->venta_id = $row['venta_id'];
+    $this->productos_id= $row['productos_id'];
+    $this->cantidad= $row['cantidad'];
 
 }
 
@@ -107,7 +111,11 @@ function update(){
     $query = "UPDATE
                 " . $this->table_name . "
             SET
-                nombre=:nombre, domicilio=:domicilio, estado=:estado
+            id_producto=:id_producto,
+            venta_id=:venta_id,
+            productos_id=:productos_id,
+            cantidad=:cantidad
+
             WHERE
                 id = :id";
 
@@ -120,10 +128,11 @@ function update(){
     //$this->description=htmlspecialchars(strip_tags($this->description));
 
     // bind new values
-    $stmt->bindParam(":nombre", $this->nombre);
-    $stmt->bindParam(":domicilio", $this->domicilio);
-    $stmt->bindParam(":estado", $this->estado);
-    $stmt->bindParam(":id", $this->id);
+    $stmt->bindParam(":id_producto", $this->id_producto);
+    $stmt->bindParam(":venta_id", $this->venta_id);
+    $stmt->bindParam(":productos_id", $this->productos_id);
+    $stmt->bindParam(":cantidad", $this->cantidad);
+    $stmt->bindParam(':id', $this->id);
 
     // execute the query
     if($stmt->execute()){
