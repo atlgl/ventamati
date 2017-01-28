@@ -4,14 +4,12 @@ class Cliente{
     private $table_name="cliente";
 
     public $id;
-
     public $persona_id;
-
-
 
     public $nombre;
     public $apat;
     public $amat;
+    public $email;
     public $domicilio;
 
 
@@ -55,11 +53,17 @@ class Cliente{
     function readAll(){
         // select all query
         $query = "SELECT
-                   id, persona_id
-                FROM
-                    " . $this->table_name . "
-                ORDER BY
-                    id DESC";
+                    cliente.id,
+                    cliente.persona_id,
+                    persona.apat,
+                    persona.amat,
+                    persona.email,
+                    persona.domicilio,
+                    persona.nombre
+                    FROM
+                    cliente
+                    INNER JOIN persona ON cliente.persona_id = persona.id
+                    ORDER BY cliente.id";
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
         // execute query

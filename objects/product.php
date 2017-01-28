@@ -12,6 +12,9 @@ class Product{
     public $unidadDeMedida;
     public $created;
 
+    public $descuento;
+    public $idMarca;
+
 
     public function __construct($db){
         $this->conn=$db;
@@ -24,7 +27,7 @@ class Product{
         $query = "INSERT INTO
                     " . $this->table_name . "
                 SET
-                    descripcion=:descripcion, precioCompra=:precioCompra, precioVenta=:precioVenta, departamento_id=:departamento_id,cantidad=:cantidad,unidadDeMedida=:unidadDeMedida";
+                    descripcion=:descripcion, precioCompra=:precioCompra, precioVenta=:precioVenta, departamento_id=:departamento_id,cantidad=:cantidad,unidadDeMedida=:unidadDeMedida,descuento=:descuento";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
@@ -34,7 +37,9 @@ class Product{
         //$this->price=htmlspecialchars(strip_tags($this->price));
         //$this->description=htmlspecialchars(strip_tags($this->description));
 
+
         // bind values
+        $stmt->bindParam(":descuento", $this->descuento);
         $stmt->bindParam(":descripcion", $this->descripcion);
         $stmt->bindParam(":precioCompra", $this->precioCompra);
         $stmt->bindParam(":precioVenta", $this->precioVenta);
@@ -58,11 +63,11 @@ class Product{
     function readAll(){
         // select all query
         $query = "SELECT
-                   id, descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida
-                FROM
+                   id, descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida, descuento, idMarca
+                   FROM
                     " . $this->table_name . "
                 ORDER BY
-                    id DESC";
+                    id DESC limit 0,20";
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
         // execute query
@@ -76,7 +81,7 @@ function readOne(){
 
     // query to read single record
     $query = "SELECT
-                descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida
+                descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida,descuento
             FROM
                 " . $this->table_name . "
             WHERE
@@ -99,6 +104,7 @@ function readOne(){
     // set values to object properties
     //descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida
 
+    $this->descuento = $row['descuento'];
     $this->descripcion = $row['descripcion'];
     $this->precioCompra = $row['precioCompra'];
     $this->precioVenta= $row['precioVenta'];
@@ -121,7 +127,8 @@ function update(){
                 precioVenta = :precioVenta,
                 departamento_id = :departamento_id,
                 cantidad = :cantidad,
-                unidadDeMedida = :unidadDeMedida
+                unidadDeMedida = :unidadDeMedida,
+                descuento = :descuento
             WHERE
                 id = :id";
 
@@ -135,6 +142,7 @@ function update(){
 
     // bind new values
     $stmt->bindParam(':descripcion', $this->decripcion);
+    $stmt->bindParam(':descuento', $this->descuento);
     $stmt->bindParam(':precioCompra', $this->precioCompra);
     $stmt->bindParam(':precioVenta', $this->precioVenta);
     $stmt->bindParam(':departamento_id', $this->departamento_id);

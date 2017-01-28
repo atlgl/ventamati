@@ -36,7 +36,12 @@ if($num>0){
 
         $data .= '{';
             $data .= '"id":"'  . $id . '",';
-            $data .= '"persona_id":"' . $nombre . '"';
+            $data .= '"persona_id":"' .$persona_id.'",';
+            $data .= '"apat":"' .$apat.'",';
+            $data .= '"amat":"' .$amat.'",';
+            $data .= '"email":"' .$email.'",';
+            $data .= '"domicilio":"' .$domicilio.'",';
+            $data .= '"nombre":"' .$nombre .'"';
         $data .= '}';
         $data .= $x<$num ? ',' : ''; $x++; }
 }

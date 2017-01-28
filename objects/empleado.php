@@ -16,7 +16,7 @@ class Empleado{
     public $domicilio;
     public $email;
 
-    public $tiendanombre
+    public $tiendanombre;
 
 
     public function __construct($db){
@@ -68,7 +68,7 @@ class Empleado{
                     empleado.persona_id,
                     empleado.tienda_id,
                     tienda.nombre as tiendanombre,
-                    persona.nombre as personanombe,
+                    persona.nombre as personanombre,
                     persona.apat,
                     persona.amat,
                     persona.email,

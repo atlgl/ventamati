@@ -38,46 +38,71 @@
         <div class="col s12">
             <h4>Compra</h4>
             <!-- modal for for creating new compra -->
-            <div id="modal-compra-form" class="modal">
+            <div id="modal-compra-form">
                 <div class="modal-content">
                     <h4 id="modal-compra-title">Nuevo Producto</h4>
                     <div class="row">
-                        <div class="input-field col s12">
-                            <input ng-model="descripcion" type="text" class="validate" id="form-name" placeholder="Nombre del comprao..." />
-                            <label for="descripcion">Nombre</label>
-                        </div>
 
-                        <div class="input-field col s12">
-                            <input ng-model="precioCompra" type="text" class="validate" placeholder="precio Compra..."/>
-                            <label for="precioCompra">Precio de Compra</label>
-                        </div>
-
-
-                        <div class="input-field col s12">
-                            <input ng-model="precioVenta" type="text" class="validate" id="form-price" placeholder="Precio de Venta..." />
-                            <label for="precioVenta">Precio de Venta</label>
-                        </div>
-
-
-
-                        <div class="input-field col s12">
-                            <input ng-model="cantidad" type="text" class="validate" id="form-price" placeholder="Cantidad..." />
-                            <label for="cantidad">Cantidad</label>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input ng-model="unidadDeMedida" type="text" class="validate" id="form-price" placeholder="Unidad de Medida..." />
-                            <label for="unidadDeMedida">Unidad de Medida</label>
-                        </div>
-
-
-                    <div class="input-field col s12">
+                  <!--  <div class="input-field col s12">
                         <select class="browser-default" ng-model="departamento_id" ng-init="getDeptoAll()" >
                             <option value="" disabled selected>Seleccionar un departamento</option>
                           <option ng-repeat="d in deptos" ng-value="d.id">{{ d.nombre +'--'+d.tiendanombre}}</option>
                         </select>
 
+                      </div>-->
+
+                    <div class="input-field col s12">
+                        <select class="browser-default" ng-model="cliente_id" ng-init="getClienteAll()" >
+                            <option value="" disabled selected>Seleccionar un Cliente</option>
+                          <option ng-repeat="c in clientes" ng-value="c.id">{{ c.nombre}}</option>
+                        </select>
+
                       </div>
+
+
+                    <div class="input-field col s12">
+                        <select class="browser-default" ng-model="empleado_id" ng-init="getEmpAll()" >
+                            <option value="" disabled selected>Seleccionar un Empleado</option>
+                          <option ng-repeat="e in emps" ng-value="e.id">{{ e.personanombre}}</option>
+                        </select>
+                      </div>
+
+                    <div class="input-field col s12">
+                        <select class="browser-default" ng-model="producto_id" ng-init="getProductoAll()" >
+                            <option value="" disabled selected>Seleccionar un Producto</option>
+                          <option ng-repeat="p in products" ng-value="p.id">{{ p.descripcion +'--'+p.precioVenta}}</option>
+                        </select>
+                      </div>
+                    <div class="input-field col s12">
+                            <a id="btn-create-compra" class="waves-effect waves-light btn margin-bottom-1em" ng-click="AddProduct()"><i class="material-icons left">add</i>Producto</a>
+
+                            <input id="form-cantidad" class="validate" type="numeric" ng-model="cantidad2"/>
+
+                            <table  class="hoverable bordered">
+                                <thead>
+                                   <tr>
+                                    <th class="text-align-center">Id</th>
+                                    <th class="width-30-pct">Nombre</th>
+                                    <th class="width-30-pct">Precio</th>
+                                    <th class="width-30-pct">Cantidad</th>
+                                   </tr>
+                                </thead>
+                                <tbody>
+
+                                   <tr ng-repeat="prod in arrayproducts">
+                                        <td class="text-align-center">{{ prod.id }}</td>
+                                        <td>{{ prod.descripcion }}</td>
+                                        <td>${{ prod.precioVenta }}</td>
+                                        <td>${{ prod.cantidad }}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                    </div>
+
+
+
 
 
 
@@ -133,9 +158,6 @@
 
 
                         <!-- floating button for creating compra -->
-    <div class="fixed-action-btn" style="bottom:45px; right:24px;">
-        <a class="waves-effect waves-light btn modal-trigger btn-floating btn-large red" href="#modal-compra-form" ng-click="showCreateForm()"><i class="large material-icons">add</i></a>
-    </div>
 
 
 
@@ -156,20 +178,35 @@
  var app = angular.module('myApp', []);
 app.controller('comprasCtrl', function($scope, $http) {
     // more angular JS codes will be here
-    $scope.showCreateForm = function(){
-    // clear form
-    $scope.clearForm();
+    $scope.arrayproducts=[{'id':'','descripcion':'','precioVenta':'','cantidad':''}];
 
-    // change modal title
-    $('#modal-compra-title').text("Nuevo Producto");
+    $scope.AddProduct=function(){
 
-    // hide update compra button
-    $('#btn-update-compra').hide();
+        $http.post('../controllerproducto/read_one.php', {
+            'id' : $scope.producto_id
+        })
+        .then(function(data, status, headers, config){
 
-    // show create compra button
-    $('#btn-create-compra').show();
+            // put the values in form
+            $scope.id = data.data[0]["id"];
+            $scope.descripcion = data.data[0]["descripcion"];
+            $scope.precioVenta = data.data[0]["precioVenta"];
+            $scope.cantidad = data.data[0]["cantidad"];
+            // show modal
+
+            $scope.arrayproducts.push({'id':$scope.id,'descripcion':$scope.descripcion,'precioVenta':$scope.precioVenta,'cantidad':$scope.cantidad2});
+
+
+            $scope.id = 0;
+            $scope.descripcion = '';
+            $scope.precioVenta =0;
+            $scope.cantidad = 0;
+
+
+        });
 
     }
+
 
     // clear variable / form values
     $scope.clearForm = function(){
@@ -217,7 +254,7 @@ app.controller('comprasCtrl', function($scope, $http) {
     $scope.getAll = function(){
         $http.get("read_compras.php").then(
             function (response){
-                $scope.names=response.data.records;
+                //$scope.names=response.data.records;
             }
         );
     }
@@ -225,14 +262,39 @@ app.controller('comprasCtrl', function($scope, $http) {
     $scope.getDeptoAll = function(){
         $http.get("../controllerdepto/read_depto.php").then(
             function (response){
-
                 $scope.deptos=response.data.records;
-                //$('select').material_select();
-
-
             }
         );
     }
+
+    $scope.getEmpAll = function(){
+        $http.get("../controllerempleado/read_empleado.php").then(
+            function (response){
+                $scope.emps=response.data.records;
+            }
+        );
+    }
+
+
+    $scope.getClienteAll = function(){
+        $http.get("../controllercliente/read_cliente.php").then(
+            function (response){
+                $scope.clientes=response.data.records;
+            }
+        );
+    }
+
+
+    $scope.getProductoAll = function(){
+        $http.get("../controllerproducto/read_products.php").then(
+            function (response){
+                $scope.products=response.data.records;
+            }
+        );
+    }
+
+
+
 
 
         // retrieve record to fill out the form

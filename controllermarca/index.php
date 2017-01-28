@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Cupon</title>
+    <title>Marca</title>
 
     <!-- include material design CSS -->
     <link rel="stylesheet" href="../libs/css/materialize/css/materialize.min.css" />
@@ -36,20 +36,20 @@
 <div class="container" ng-app="myApp" ng-controller="cuponsCtrl">
     <div class="row">
         <div class="col s12">
-            <h4>Cupon</h4>
+            <h4>Marca</h4>
             <!-- modal for for creating new cupon -->
             <div id="modal-cupon-form" class="modal">
                 <div class="modal-content">
-                    <h4 id="modal-cupon-title">Nuevo Cupon</h4>
+                    <h4 id="modal-cupon-title">Nuevo Marca</h4>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input ng-model="descripcion" type="text" class="validate" id="form-name" placeholder="Descripcion del cupon." />
+                            <input ng-model="descripcion" type="text" class="validate" id="form-name" placeholder="Descripcion de marca." />
                             <label for="descripcion">Nombre</label>
                         </div>
 
                         <div class="input-field col s12">
                             <input ng-model="descuento" type="text" class="validate" placeholder="Descuento..."/>
-                            <label for="descuento">Precio de Compra</label>
+                            <label for="descuento">Descuento</label>
                         </div>
 
                         <div class="input-field col s12">
@@ -123,7 +123,7 @@ app.controller('cuponsCtrl', function($scope, $http) {
     $scope.clearForm();
 
     // change modal title
-    $('#modal-cupon-title').text("Nuevo Cupon");
+    $('#modal-cupon-title').text("Nuevo Marca");
 
     // hide update cupon button
     $('#btn-update-cupon').hide();
@@ -142,7 +142,7 @@ app.controller('cuponsCtrl', function($scope, $http) {
 
 
     // create new cupon
-    $scope.createCupon = function(){
+    $scope.createMarca = function(){
 //descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida
         // fields in key-value pairs
         $http.post('create_cupon.php', {
@@ -153,7 +153,7 @@ app.controller('cuponsCtrl', function($scope, $http) {
 
                 console.log(data);
             // tell the user new cupon was created
-            Materialize.toast("Cupon fue creado", 4000);
+            Materialize.toast("Marca fue creado", 4000);
 
             // close modal
             $('#modal-cupon-form').modal('close');
