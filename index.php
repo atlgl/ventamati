@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Tienda Proyecto WalK-MART</title>
+  <title>Tienda Proyecto Wal-MART</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -46,7 +46,7 @@
   <div class="container">
     <div class="section">
 
-      <!--   Icon Section   -->
+      <!--   Icon Section
       <div class="row">
         <div class="col s12 m4">
           <div class="icon-block">
@@ -83,12 +83,12 @@
 
     </div>
   </div>
-
+ -->
   <footer class="page-footer orange">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Tienda Proyecto WalK-MART</h5>
+          <h5 class="white-text">Tienda Proyecto Wal-MART</h5>
           <p class="grey-text text-lighten-4">Desarrollo de proyecto tienda.Se pueden capturar productos, tiendas , departamentos etc.</p>
 
 
