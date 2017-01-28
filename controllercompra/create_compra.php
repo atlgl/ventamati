@@ -5,20 +5,17 @@ $database = new Database();
 $db = $database->getConnection();
 
 // instantiate product object
-include_once '../objects/product.php';
-$product = new Product($db);
+include_once '../objects/compra.php';
+$product = new Compra($db);
 
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
 
 // set product property values
-$product->descripcion = $data->descripcion;
-$product->precioCompra = $data->precioCompra;
-$product->precioVenta = $data->precioVenta;
-$product->departamento_id = $data->departamento_id;
-$product->cantidad = $data->cantidad;
-$product->unidadDeMedida = $data->unidadDeMedida;
-//$product->created = date('Y-m-d H:i:s');
+$product->cliente_id = $data->cliente_id;
+$product->empleado_id = $data->empleado_id;
+$product->fecha = date('Y-m-d H:i:s');
+
 
 // create the product
 if($product->create()){

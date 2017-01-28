@@ -6,11 +6,15 @@ class Compra{
     public $id;
     public $cliente_id;
     public $empleado_id;
+    public $fecha;
+    public $idcupon;
 
 
     public function __construct($db){
         $this->conn=$db;
     }
+
+
 
         // create product
     function create(){
@@ -19,7 +23,7 @@ class Compra{
         $query = "INSERT INTO
                     " . $this->table_name . "
                 SET
-                    cliente_id=:cliente_id, empleado_id=:empleado_id";
+                    cliente_id=:cliente_id, empleado_id=:empleado_id, fecha=:fecha";
 
         // prepare query
         $stmt = $this->conn->prepare($query);
@@ -32,6 +36,7 @@ class Compra{
         // bind values
         $stmt->bindParam(":cliente_id", $this->cliente_id);
         $stmt->bindParam(":empleado_id", $this->empleado_id);
+        $stmt->bindParam(":fecha", $this->fecha);
 
         // execute query
         if($stmt->execute()){
@@ -149,6 +154,32 @@ function delete(){
     }else{
         return false;
     }
+}
+
+
+    function lastRecord(){
+
+    // query to read single record
+    $query = "SELECT
+                MAX(id=:id) as id
+            FROM
+                compra";
+
+    // prepare query statement
+    $stmt = $this->conn->prepare( $query );
+
+    // bind id of product to be updated
+    $stmt->bindParam(":id", $this->id);
+
+    // execute query
+    $stmt->execute();
+
+    // get retrieved row
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // set values to object properties
+
+    $this->id = $row['id'];
 }
 
 }

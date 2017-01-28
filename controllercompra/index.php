@@ -70,13 +70,16 @@
                     <div class="input-field col s12">
                         <select class="browser-default" ng-model="producto_id" ng-init="getProductoAll()" >
                             <option value="" disabled selected>Seleccionar un Producto</option>
-                          <option ng-repeat="p in products" ng-value="p.id">{{ p.descripcion +'--'+p.precioVenta}}</option>
+                          <option ng-repeat="p in products" ng-value="p.id">{{ p.descripcion +'-----PrecioNormal=>'+p.precioVenta+'------Precio con Descuento'+ (p.precioVenta-p.precioVenta*1*p.descuento)}}</option>
                         </select>
                       </div>
                     <div class="input-field col s12">
                             <a id="btn-create-compra" class="waves-effect waves-light btn margin-bottom-1em" ng-click="AddProduct()"><i class="material-icons left">add</i>Producto</a>
-
-                            <input id="form-cantidad" class="validate" type="numeric" ng-model="cantidad2"/>
+                     <div class="input-field col s12">
+                           <label for="form-cantidad">Cantidad</label>
+                            <input id="form-cantidad" class="validate" type="numeric"
+                             ng-model="cantidad2"/>
+                        </div>
 
                             <table  class="hoverable bordered">
                                 <thead>
@@ -101,17 +104,9 @@
 
                     </div>
 
-
-
-
-
-
-
-
                         <div class="input-field col s12">
-                            <a id="btn-create-compra" class="waves-effect waves-light btn margin-bottom-1em" ng-click="createProduct()"><i class="material-icons left">add</i>Nuevo</a>
 
-                            <a id="btn-update-compra" class="waves-effect waves-light btn margin-bottom-1em" ng-click="updateProduct()"><i class="material-icons left">edit</i>Guardar Cambios</a>
+                            <a id="btn-update-compra" class="waves-effect waves-light btn margin-bottom-1em" ng-click="guardarCompra()"><i class="material-icons left">edit</i>Guardar Cambios</a>
 
                             <a class="modal-action modal-close waves-effect waves-light btn margin-bottom-1em"><i class="material-icons left">close</i>Cerrar</a>
                         </div>
@@ -205,6 +200,16 @@ app.controller('comprasCtrl', function($scope, $http) {
 
         });
 
+    }
+
+    $scope.guardarCompra=function(){
+        $http.post('create_compra.php',{
+            'empleado_id':$scope.empleado_id,
+            'cliente_id': $scope.cliente_id
+                   })
+            .then(function(response){
+
+        });
     }
 
 

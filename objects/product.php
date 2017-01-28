@@ -65,9 +65,9 @@ class Product{
         $query = "SELECT
                    id, descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida, descuento, idMarca
                    FROM
-                    " . $this->table_name . "
+                    productos
                 ORDER BY
-                    id DESC limit 0,20";
+                    id DESC ";
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
         // execute query
