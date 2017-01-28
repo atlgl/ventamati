@@ -34,12 +34,12 @@ class DataProvider{
     function readProductExpencive(){
         // select all query
         $query = "SELECT
-                    p.descripcion,
-                    p.precioCompra,
-                    p.precioVenta,
-                    t.nombre tienda,
-                    d.nombre departamento,
-                    p.cantidad
+                    p.descripcion as descripcion,
+                    p.precioCompra as precioCompra,
+                    p.precioVenta as precioVenta,
+                    t.nombre as tienda,
+                    d.nombre as departamento,
+                    p.cantidad as cantidad
                 FROM
                     productos p
                 JOIN departamento d ON d.id = p.id
@@ -47,7 +47,7 @@ class DataProvider{
                 ORDER BY
                     p.cantidad DESC
                 LIMIT 0,
-                 10;";
+                 10";
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
         // execute query

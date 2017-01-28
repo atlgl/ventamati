@@ -1,4 +1,4 @@
-<?php
+<?
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
@@ -42,4 +42,5 @@ if($num>0){
 }
 // json format output
 echo '{"records":[' . $data . ']}';
+
 ?>

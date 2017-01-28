@@ -96,10 +96,10 @@
         <div class="col l3 s12">
           <h5 class="white-text">Settings</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
+            <li><a class="white-text" href="consultas/consulta1.php">Consulta 1</a></li>
+            <li><a class="white-text" href="#!">Consulta 2</a></li>
+            <li><a class="white-text" href="#!">Consulta 3</a></li>
+            <li><a class="white-text" href="#!">Consulta 4</a></li>
           </ul>
         </div>
         <div class="col l3 s12">
