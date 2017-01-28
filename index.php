@@ -94,21 +94,25 @@
 
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
+          <h5 class="white-text">Consultas Parte 1</h5>
           <ul>
             <li><a class="white-text" href="consultas/consulta1.php">Consulta 1</a></li>
-            <li><a class="white-text" href="#!">Consulta 2</a></li>
-            <li><a class="white-text" href="#!">Consulta 3</a></li>
-            <li><a class="white-text" href="#!">Consulta 4</a></li>
+            <li><a class="white-text" href="consultas/consulta2.php">Consulta 2</a></li>
+            <li><a class="white-text" href="consultas/consulta3.php">Consulta 3</a></li>
+            <li><a class="white-text" href="consultas/consulta4.php">Consulta 4</a></li>
+            <li><a class="white-text" href="consultas/consulta5.php">Consulta 5</a></li>
+            <li><a class="white-text" href="consultas/consulta6.php">Consulta 6</a></li>
           </ul>
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
+          <h5 class="white-text">Consultas Parte 2</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
+            <li><a class="white-text" href="consultas/consulta7.php">Consulta 7</a></li>
+            <li><a class="white-text" href="consultas/consulta8.php">Consulta 8</a></li>
+            <li><a class="white-text" href="consultas/consulta9.php">Consulta 9</a></li>
+            <li><a class="white-text" href="consultas/consulta10.php">Consulta 10</a></li>
+            <li><a class="white-text" href="consultas/consulta11.php">Consulta 11</a></li>
+            <li><a class="white-text" href="consultas/consulta12.php">Consulta 12</a></li>
           </ul>
         </div>
       </div>

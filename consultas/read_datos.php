@@ -1,6 +1,6 @@
 <?
 header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=ISO-8859-1");
+header("Content-Type: application/html; charset=ISO-8859-1");
 
 // include database and object files
 include_once '../config/database.php';
@@ -15,8 +15,8 @@ $datos = new DataProvider($db);
 
 
 $opc = json_decode(file_get_contents("php://input"));
-$opc1=12;
-switch($opc1)
+//$opc1=12;
+switch($opc->opc)
 {
     case 1:
         $stmt = $datos->readDeptoSuc();
@@ -79,5 +79,5 @@ if($num>0){
 }
 // json format output
 print_r(json_encode($result));
-print_r($result);
+
 ?>

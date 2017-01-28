@@ -34,7 +34,8 @@ class DataProvider{
     function readProductExpencive(){
         // select all query
         $query = "SELECT
-                    p.descripcion as descripcion,
+                    p.id,
+                    TRIM(p.descripcion) as descripcion,
                     p.precioCompra as precioCompra,
                     p.precioVenta as precioVenta,
                     t.nombre as tienda,
@@ -221,7 +222,7 @@ Query pasa saber cuales son los empleados de cada tienda y el puesto ordenados p
     function readEmpleadoTienda(){
         // select all query
         $query = "SELECT DISTINCT
-                    t.nombre Tienda,
+                    t.nombre as tienda,
                     e.puesto,
                     p.nombre,
                     p.apat,
@@ -249,7 +250,7 @@ Query pasa saber cuales son los empleados de cada tienda y el puesto ordenados p
     function readEmailGerentes(){
         // select all query
         $query = "SELECT DISTINCT
-	t.nombre Tienda,
+	t.nombre as tienda,
 	e.puesto,
 	concat(
 		p.nombre,
@@ -257,7 +258,7 @@ Query pasa saber cuales son los empleados de cada tienda y el puesto ordenados p
 		p.apat,
 		' ',
 		p.amat
-	) nombre,
+	) as nombre,
 	p.email
 FROM
 	empleado e
@@ -281,24 +282,24 @@ Query que nos sirve para saber que clientes existen en sistema y asi como saber 
 function readClienteCompra(){
         // select all query
         $query = "SELECT DISTINCT
-	t.nombre AS Tienda,
-	concat(
-		p.nombre,
-		' ',
-		p.apat,
-		' ',
-		p.amat
-	) nombreCliente,
-	p.email emailCliente
-FROM
-	cliente c
-LEFT JOIN persona p ON c.persona_id = p.id
-LEFT JOIN compra com ON com.cliente_id = c.id
-LEFT JOIN empleado emp ON empleado_id = com.empleado_id
-LEFT JOIN tienda t ON t.id = emp.tienda_id
-GROUP BY
-	2,
-	1";
+        t.nombre AS tienda,
+        concat(
+            p.nombre,
+            ' ',
+            p.apat,
+            ' ',
+            p.amat
+        ) as nombreCliente,
+        p.email as emailCliente
+    FROM
+        cliente c
+    LEFT JOIN persona p ON c.persona_id = p.id
+    LEFT JOIN compra com ON com.cliente_id = c.id
+    LEFT JOIN empleado emp ON empleado_id = com.empleado_id
+    LEFT JOIN tienda t ON t.id = emp.tienda_id
+    GROUP BY
+        2,
+        1";
         // prepare query statement
         $stmt = $this->conn->prepare( $query );
         // execute query
@@ -315,14 +316,14 @@ Query que nos sirbe para saber que provedores estan en sistema adicioinalmente s
 function readProveedoresCompra(){
         // select all query
         $query = "SELECT DISTINCT
-	t.nombre Tienda,
+	t.nombre as Tienda,
 	concat(
 		p.nombre,
 		' ',
 		p.apat,
 		' ',
 		p.amat
-	) nombreProvedor,
+	) as nombreProveedor,
 	c.razonSocial,
 	p.email emailProvedor
 FROM

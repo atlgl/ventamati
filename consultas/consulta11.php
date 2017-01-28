@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>10 productos que se compran mas caro y su inventario</title>
+    <title>clientes existen en sistema y asi como saber hacen compra o no y en que tiendas asi como sus emails</title>
 
     <!-- include material design CSS -->
     <link rel="stylesheet" href="../libs/css/materialize/css/materialize.min.css" />
@@ -35,7 +35,7 @@
 <div class="container" ng-app="myApp" ng-controller="productsCtrl">
     <div class="row">
         <div class="col s12">
-            <h4>10 productos que se compran mas caro y su inventario</h4>
+            <h4>clientes existen en sistema y asi como saber hacen compra o no y en que tiendas asi como sus emails</h4>
 
 
              <!-- used for searching the current list -->
@@ -46,23 +46,21 @@
 
     <thead>
         <tr>
-            <th class="text-align-center">Descripcion</th>
-            <th class="width-30-pct">PrecioCompra</th>
-            <th class="width-30-pct">Precio Venta</th>
-            <th class="width-30-pct">Tienda</th>
-            <th class="width-30-pct">Departamento</th>
-            <th class="width-30-pct">Cantidad</th>
+            <th class="text-align-center">Tienda</th>
+
+            <th class="width-30-pct">Nombre</th>
+            <th class="width-30-pct">Email</th>
+
         </tr>
     </thead>
 
     <tbody ng-init="readOne()">
         <tr ng-repeat="x in names | filter:search">
-            <td class="text-align-center">{{ x.descripcion }}</td>
-            <td>{{ x.precioCompra }}</td>
-            <td>{{ x.precioVenta }}</td>
-            <td>{{ x.tienda }}</td>
-            <td>{{ x.departamento }}</td>
-            <td>{{ x.cantidad }}</td>
+            <td class="text-align-center">{{ x.tienda }}</td>
+            <td>{{ x.nombreCliente }}</td>
+            <td>{{ x.emailCliente }}</td>
+
+
         </tr>
     </tbody>
 </table>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>10 productos que se compran mas caro y su inventario</title>
+    <title>20 productos de los que mas se tiene en el inventario</title>
 
     <!-- include material design CSS -->
     <link rel="stylesheet" href="../libs/css/materialize/css/materialize.min.css" />
@@ -35,7 +35,7 @@
 <div class="container" ng-app="myApp" ng-controller="productsCtrl">
     <div class="row">
         <div class="col s12">
-            <h4>10 productos que se compran mas caro y su inventario</h4>
+            <h4>20 productos de los que mas se tiene en el inventario</h4>
 
 
              <!-- used for searching the current list -->
@@ -46,23 +46,21 @@
 
     <thead>
         <tr>
-            <th class="text-align-center">Descripcion</th>
-            <th class="width-30-pct">PrecioCompra</th>
-            <th class="width-30-pct">Precio Venta</th>
-            <th class="width-30-pct">Tienda</th>
-            <th class="width-30-pct">Departamento</th>
+           <th class="text-align-center">Tienda</th>
+            <th class="width-30-pct">Depto</th>
+            <th class="width-30-pct">Descripcion Venta</th>
             <th class="width-30-pct">Cantidad</th>
+            <th class="width-30-pct">U. Medida</th>
         </tr>
     </thead>
 
     <tbody ng-init="readOne()">
         <tr ng-repeat="x in names | filter:search">
-            <td class="text-align-center">{{ x.descripcion }}</td>
-            <td>{{ x.precioCompra }}</td>
-            <td>{{ x.precioVenta }}</td>
-            <td>{{ x.tienda }}</td>
-            <td>{{ x.departamento }}</td>
+            <td class="text-align-center">{{ x.tiendanombre }}</td>
+            <td>{{ x.deptonombre }}</td>
+            <td>{{ x.descripcion }}</td>
             <td>{{ x.cantidad }}</td>
+            <td>{{ x.unidadDeMedida }}</td>
         </tr>
     </tbody>
 </table>
@@ -86,7 +84,7 @@ app.controller('productsCtrl', function($scope, $http) {
         // retrieve record to fill out the form
     $scope.readOne = function(){
         $http.post('read_datos.php', {
-            'opc' : 2
+            'opc' : 6
         })
         .then(function(responce, status, headers, config){
             console.log(responce.data);
