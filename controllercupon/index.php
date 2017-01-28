@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Compra</title>
+    <title>Cupon</title>
 
     <!-- include material design CSS -->
     <link rel="stylesheet" href="../libs/css/materialize/css/materialize.min.css" />
@@ -33,60 +33,29 @@
 <body>
 
 <!-- page content and controls will be here -->
-<div class="container" ng-app="myApp" ng-controller="comprasCtrl">
+<div class="container" ng-app="myApp" ng-controller="cuponsCtrl">
     <div class="row">
         <div class="col s12">
-            <h4>Compra</h4>
-            <!-- modal for for creating new compra -->
-            <div id="modal-compra-form" class="modal">
+            <h4>Cupon</h4>
+            <!-- modal for for creating new cupon -->
+            <div id="modal-cupon-form" class="modal">
                 <div class="modal-content">
-                    <h4 id="modal-compra-title">Nuevo Producto</h4>
+                    <h4 id="modal-cupon-title">Nuevo Cupon</h4>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input ng-model="descripcion" type="text" class="validate" id="form-name" placeholder="Nombre del comprao..." />
+                            <input ng-model="descripcion" type="text" class="validate" id="form-name" placeholder="Descripcion del cupon." />
                             <label for="descripcion">Nombre</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input ng-model="precioCompra" type="text" class="validate" placeholder="precio Compra..."/>
-                            <label for="precioCompra">Precio de Compra</label>
-                        </div>
-
-
-                        <div class="input-field col s12">
-                            <input ng-model="precioVenta" type="text" class="validate" id="form-price" placeholder="Precio de Venta..." />
-                            <label for="precioVenta">Precio de Venta</label>
-                        </div>
-
-
-
-                        <div class="input-field col s12">
-                            <input ng-model="cantidad" type="text" class="validate" id="form-price" placeholder="Cantidad..." />
-                            <label for="cantidad">Cantidad</label>
+                            <input ng-model="descuento" type="text" class="validate" placeholder="Descuento..."/>
+                            <label for="descuento">Precio de Compra</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input ng-model="unidadDeMedida" type="text" class="validate" id="form-price" placeholder="Unidad de Medida..." />
-                            <label for="unidadDeMedida">Unidad de Medida</label>
-                        </div>
+                            <a id="btn-create-cupon" class="waves-effect waves-light btn margin-bottom-1em" ng-click="createProduct()"><i class="material-icons left">add</i>Nuevo</a>
 
-
-                    <div class="input-field col s12">
-                        <select class="browser-default" ng-model="departamento_id" ng-init="getDeptoAll()" >
-                            <option value="" disabled selected>Seleccionar un departamento</option>
-                          <option ng-repeat="d in deptos" ng-value="d.id">{{ d.nombre +'--'+d.tiendanombre}}</option>
-                        </select>
-
-                      </div>
-
-
-
-
-
-                        <div class="input-field col s12">
-                            <a id="btn-create-compra" class="waves-effect waves-light btn margin-bottom-1em" ng-click="createProduct()"><i class="material-icons left">add</i>Nuevo</a>
-
-                            <a id="btn-update-compra" class="waves-effect waves-light btn margin-bottom-1em" ng-click="updateProduct()"><i class="material-icons left">edit</i>Guardar Cambios</a>
+                            <a id="btn-update-cupon" class="waves-effect waves-light btn margin-bottom-1em" ng-click="updateProduct()"><i class="material-icons left">edit</i>Guardar Cambios</a>
 
                             <a class="modal-action modal-close waves-effect waves-light btn margin-bottom-1em"><i class="material-icons left">close</i>Cerrar</a>
                         </div>
@@ -96,21 +65,17 @@
 
 
              <!-- used for searching the current list -->
-<input type="text" ng-model="search" class="form-control" placeholder="Buscar compraos..." />
+<input type="text" ng-model="search" class="form-control" placeholder="Buscar cuponos..." />
 
-<!-- table that shows compra record list -->
+<!-- table that shows cupon record list -->
 <table class="hoverable bordered">
 
     <thead>
         <tr>
             <th class="text-align-center">ID</th>
             <th class="width-30-pct">Descripcion</th>
-            <th class="text-align-center">Precio Venta</th>
-            <th class="text-align-center">Precio Venta</th>
-            <th class="text-align-center">Departamento</th>
-            <th class="text-align-center">Cantidad</th>
-            <th class="text-align-center">Unidad de Medida</th>
-            <th class="text-align-center">Acciones</th>
+            <th class="text-align-center">Descuento</th>
+            <!--<th class="text-align-center">Acciones</th>-->
         </tr>
     </thead>
 
@@ -118,23 +83,20 @@
         <tr ng-repeat="x in names | filter:search">
             <td class="text-align-center">{{ x.id }}</td>
             <td>{{ x.descripcion }}</td>
-            <td>{{ x.precioVenta }}</td>
-            <td>{{ x.precioCompra }}</td>
-            <td>{{ x.departamento_id }}</td>
-            <td>{{ x.cantidad }}</td>
-            <td>{{ x.unidadDeMedida }}</td>
-            <td>
+            <td>%{{ x.descuento }}</td>
+
+          <!--  <td>
                 <a ng-click="readOne(x.id)" class="waves-effect waves-light btn margin-bottom-1em"><i class="material-icons left">edit</i>Edit</a>
                 <a ng-click="deleteProduct(x.id)" class="waves-effect waves-light btn margin-bottom-1em"><i class="material-icons left">delete</i>Delete</a>
-            </td>
+            </td>-->
         </tr>
     </tbody>
 </table>
 
 
-                        <!-- floating button for creating compra -->
+                        <!-- floating button for creating cupon -->
     <div class="fixed-action-btn" style="bottom:45px; right:24px;">
-        <a class="waves-effect waves-light btn modal-trigger btn-floating btn-large red" href="#modal-compra-form" ng-click="showCreateForm()"><i class="large material-icons">add</i></a>
+        <a class="waves-effect waves-light btn modal-trigger btn-floating btn-large red" href="#modal-cupon-form" ng-click="showCreateForm()"><i class="large material-icons">add</i></a>
     </div>
 
 
@@ -154,20 +116,20 @@
 <script type="text/javascript">
 // angular js codes will be here
  var app = angular.module('myApp', []);
-app.controller('comprasCtrl', function($scope, $http) {
+app.controller('cuponsCtrl', function($scope, $http) {
     // more angular JS codes will be here
     $scope.showCreateForm = function(){
     // clear form
     $scope.clearForm();
 
     // change modal title
-    $('#modal-compra-title').text("Nuevo Producto");
+    $('#modal-cupon-title').text("Nuevo Cupon");
 
-    // hide update compra button
-    $('#btn-update-compra').hide();
+    // hide update cupon button
+    $('#btn-update-cupon').hide();
 
-    // show create compra button
-    $('#btn-create-compra').show();
+    // show create cupon button
+    $('#btn-create-cupon').show();
 
     }
 
@@ -175,34 +137,26 @@ app.controller('comprasCtrl', function($scope, $http) {
     $scope.clearForm = function(){
         $scope.id = "";
         $scope.descripcion = "";
-        $scope.precioCompra = "";
-        $scope.precioVenta = "";
-        $scope.departamento_id = "";
-        $scope.cantidad = "";
-        $scope.unidadDeMedida = "";
+        $scope.descuento = "";
     }
 
 
-    // create new compra
-    $scope.createProduct = function(){
+    // create new cupon
+    $scope.createCupon = function(){
 //descripcion, precioCompra, precioVenta, departamento_id, cantidad, unidadDeMedida
         // fields in key-value pairs
-        $http.post('create_compra.php', {
+        $http.post('create_cupon.php', {
                 'descripcion' : $scope.descripcion,
-                'precioCompra' : $scope.precioCompra,
-                'precioVenta' : $scope.precioVenta,
-                'departamento_id' : $scope.departamento_id,
-                'cantidad' : $scope.cantidad,
-                'unidadDeMedida' : $scope.unidadDeMedida
+                'descuento' : $scope.precioCompra
             }).then(
             function (data, status, headers, config) {
 
                 console.log(data);
-            // tell the user new compra was created
-            Materialize.toast("Producto fue creado", 4000);
+            // tell the user new cupon was created
+            Materialize.toast("Cupon fue creado", 4000);
 
             // close modal
-            $('#modal-compra-form').modal('close');
+            $('#modal-cupon-form').modal('close');
 
             // clear modal content
             $scope.clearForm();
@@ -213,9 +167,9 @@ app.controller('comprasCtrl', function($scope, $http) {
     }
 
 
-    // read compras
+    // read cupons
     $scope.getAll = function(){
-        $http.get("read_compras.php").then(
+        $http.get("read_cupon.php").then(
             function (response){
                 $scope.names=response.data.records;
             }
@@ -239,15 +193,15 @@ app.controller('comprasCtrl', function($scope, $http) {
     $scope.readOne = function(id){
 
         // change modal title
-        $('#modal-compra-title').text("Edit Product");
+        $('#modal-cupon-title').text("Edit Product");
 
-        // show udpate compra button
-        $('#btn-update-compra').show();
+        // show udpate cupon button
+        $('#btn-update-cupon').show();
 
-        // show create compra button
-        $('#btn-create-compra').hide();
+        // show create cupon button
+        $('#btn-create-cupon').hide();
 
-        // post id of compra to be edited
+        // post id of cupon to be edited
         $http.post('read_one.php', {
             'id' : id
         })
@@ -263,16 +217,16 @@ app.controller('comprasCtrl', function($scope, $http) {
             $scope.departamento_id = data.data[0]["departamento_id"];
 
             // show modal
-            $('#modal-compra-form').modal('open');
+            $('#modal-cupon-form').modal('open');
         })
         .error(function(data, status, headers, config){
             Materialize.toast('Unable to retrieve record.', 4000);
         });
     }
 
-    // update compra record / save changes
+    // update cupon record / save changes
     $scope.updateProduct = function(){
-        $http.post('update_compra.php', {
+        $http.post('update_cupon.php', {
                 'descripcion' : $scope.descripcion,
                 'precioCompra' : $scope.precioCompra,
                 'precioVenta' : $scope.precioVenta,
@@ -281,32 +235,32 @@ app.controller('comprasCtrl', function($scope, $http) {
                 'unidadDeMedida' : $scope.unidadDeMedida
         })
         .then(function (data, status, headers, config){
-            // tell the user compra record was updated
+            // tell the user cupon record was updated
             Materialize.toast(data.data, 4000);
 
             // close modal
-            $('#modal-compra-form').modal('close');
+            $('#modal-cupon-form').modal('close');
 
             // clear modal content
             $scope.clearForm();
 
-            // refresh the compra list
+            // refresh the cupon list
             $scope.getAll();
         });
     }
 
 
-// delete compra
+// delete cupon
 $scope.deleteProduct = function(id){
 
     // ask the user if he is sure to delete the record
-    if(confirm("Esta seguro de eliminar el comprao?")){
-        // post the id of compra to be deleted
-        $http.post('delete_compra.php', {
+    if(confirm("Esta seguro de eliminar el cupono?")){
+        // post the id of cupon to be deleted
+        $http.post('delete_cupon.php', {
             'id' : id
         }).then(function (data, status, headers, config){
 
-            // tell the user compra was deleted
+            // tell the user cupon was deleted
             Materialize.toast(data.data, 4000);
 
             // refresh the list
