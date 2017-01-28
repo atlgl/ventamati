@@ -316,7 +316,7 @@ Query que nos sirbe para saber que provedores estan en sistema adicioinalmente s
 function readProveedoresCompra(){
         // select all query
         $query = "SELECT DISTINCT
-	t.nombre as Tienda,
+	t.nombre as tienda,
 	concat(
 		p.nombre,
 		' ',
@@ -325,7 +325,7 @@ function readProveedoresCompra(){
 		p.amat
 	) as nombreProveedor,
 	c.razonSocial,
-	p.email emailProvedor
+	p.email as emailProvedor
 FROM
 	proveedor c
 LEFT JOIN persona p ON c.persona_id = p.id

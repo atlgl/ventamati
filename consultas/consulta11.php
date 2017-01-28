@@ -84,10 +84,10 @@ app.controller('productsCtrl', function($scope, $http) {
         // retrieve record to fill out the form
     $scope.readOne = function(){
         $http.post('read_datos.php', {
-            'opc' : 2
+            'opc' : 11
         })
         .then(function(responce, status, headers, config){
-            console.log(responce.data);
+
             $scope.names=responce.data;
         });
 
